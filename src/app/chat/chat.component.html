@@ -1,0 +1,21 @@
+<div class="container" fxLayout="row">
+    <div fxFlex="30" fxLayout="column" class="leftdiv" >
+        <section fxLayout="row" fxLayoutAlign="center center">
+            <button  fxFlex="50" mat-raised-button (click)="toggleUsers()" [ngClass]="{'underline' : cusers}" >Current Users</button>
+            <button fxFlex="50" mat-raised-button (click)="toggleUsers()"  [ngClass]="{'underline' : !cusers}">All Users</button>
+        </section>
+        <div *ngIf="cusers" ><div *ngFor="let user of currentUsers">{{user.username}}</div></div>
+        <!-- <div *ngIf="!cusers" *ngFor="let user of allUsers">{{user.username}}</div> -->
+    </div>
+    <div #chatbox fxFlex="70" fxLayout="column" class="rightdiv">
+        <div class = "chat" style="overflow: scroll; height: 95%;"  #scrollMe [scrollTop]="scrollMe.scrollHeight"  >
+            <div *ngFor = "let message of messages" >
+                {{message.text}}
+            </div>
+        </div>
+        <div class="text" fxFlex="90" fxLayout="row">
+            <i class="far fa-keyboard fa-2x"></i>
+            <input  style="margin:5px" size = "{{(95/1000)*chatbox.offsetWidth}}" matInput [(ngModel)] = "newMessage" (keyup)="$event.keyCode == 13 && sendMessage()"/><button (click)="sendMessage()">Send Message</button>
+        </div>
+    </div>
+</div>

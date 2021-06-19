@@ -1,0 +1,21 @@
+<div class="maindiv" fxLayout="column" fxLayoutAlign="center center">
+    <div fxFlex fxLayoutAlign="center" class="head " ><h3>Login</h3></div>
+    <div class ="fform">
+      <form #box [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="full-width">
+            <label>E-mail:<br></label>
+            <input size="{{90/1000*box.offsetWidth}}" formControlName="email"/>
+        </div>
+        <div class="full-width">
+            <label>Password:<br></label>
+            <input matInput size="{{90/1000*box.offsetWidth}}" formControlName="password"/>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="center">
+           <button fxLayoutAlign="center" type="submit" mat-raised-button class="submit">Submit</button>
+           <span fxLayoutAlign="center">haven't Signed up yet?<a href="/register">Register</a></span>
+        </div>  
+      </form>
+      
+    </div>
+</div>
+  

@@ -1,0 +1,48 @@
+.head{
+    background-color: rgba(64, 61, 66,1);
+    color: white;
+    width: 100%;
+    font-family: serif;
+    font-size:50px;
+}
+.maindiv{
+    width:30%;
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-top: 10%;
+    border-style: groove;
+    margin-bottom: 10%;
+    top :0;
+    min-width : 250px;
+    position :absolute;
+    margin-bottom : 100px;
+}
+
+.full-width{
+    padding : 2 px;
+    height: 50px;
+    width: 95%;
+    margin-top: 2px;
+    font-size: 20px;
+    margin-bottom: 2px;
+}
+
+.center{
+    text-align : center;
+    margin : 5px;
+    padding : 5px;
+}
+
+.submit{
+    background-color: rgba(64, 61, 66,1);
+    font-size:20px;
+    width : 120px;
+    color : white;
+    font-family: serif;
+    margin-left: 100px;
+    margin-bottom: 5px;                                         
+}
+
+.fform{
+    margin: auto;
+}

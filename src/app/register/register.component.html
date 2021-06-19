@@ -1,0 +1,38 @@
+<div class="maindiv" fxLayout="column" fxLayoutAlign="center center">
+    <div fxFlex fxLayoutAlign="center" class="head " ><h3>Register</h3></div>
+    <div #box class="fform">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="full-width">
+            <label>Choose a username:<br></label>
+            <input size="{{90/1000*box.offsetWidth}}" formControlName="username">
+        </div>
+        <div class="full-width">
+            <label>Enter your e-mail:<br></label>
+            <input size="{{90/1000*box.offsetWidth}}" formControlName="email">
+        </div>
+        <div class="full-width">
+            <label>Enter password:<br></label>
+            <input size="{{90/1000*box.offsetWidth}}" formControlName="password">
+        </div>
+        <div class="full-width">
+            <label>Confirm your password :<br></label>
+            <input size="{{90/1000*box.offsetWidth}}" formControlName="password">
+        </div>
+        <div class="full-width">
+            <label>Upload a profile picture:<br></label>
+            <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" formControlName="image">
+        </div>
+        <div fxLayout="column" class="center">
+           <button type="submit" mat-raised-button class="submit">Sign-up</button>
+        </div>  
+      </form>
+      <div *ngIf="imgprev">
+        <mat-card >
+          <mat-card-title>Image Preview : </mat-card-title>
+          <img  class="preview" src="{{img}}"/>
+        </mat-card> 
+      </div>
+    </div>
+</div>
+  
+

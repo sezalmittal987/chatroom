@@ -1,0 +1,17 @@
+<header class="toolbar container">
+    <!-- <mat-toolbar > -->
+        <div>
+            <span class="logo"><a routerLink="/home" ><i class="fas fa-sms fa-4x" ></i></a></span>
+            <span class="spacer"></span>
+            <span class="topnav">
+                <a routerLink="/home">Home </a>
+                <a routerLink="/rooms">Service </a>
+                <a routerLink="/">Contact Us </a>
+            <a *ngIf="!loggedIn" routerLink="/">Login</a>
+            <a *ngIf="!loggedIn" routerLink="/">Signin</a>
+            <a *ngIf="loggedIn">Hello {{currentUser.username}}</a>
+            </span>
+        </div>
+    <!-- </mat-toolbar> -->
+</header>
+

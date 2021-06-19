@@ -1,0 +1,84 @@
+.container{
+  position : absolute;
+  margin-top : 7rem;
+  /* margin-bottom : 200px; */
+  padding-bottom : 7 rem;
+  top : 0 ;
+}
+
+.leftcenter {
+  display: inline-block;
+  justify-content: center;
+  min-width : 50vw;
+}
+
+.heading{
+  text-align: center;
+}
+
+.room-card{
+  word-wrap: break-word;
+  width : 90%;
+  margin : 2em;
+  box-shadow: 1px 1px 1px 2px rgba(0, 0, 255, .2);
+}
+
+.button-card{
+  /* word-wrap: break-word; */
+  /* width : 90%; */
+  /* margin : 2em; */
+  box-shadow: 1px 1px 1px 2px rgba(0, 0, 255, .2);
+}
+
+.head{
+  background-color: rgba(64, 61, 66,1);
+  color: white;
+  width: 100%;
+  font-family: serif;
+  font-size:50px;
+}
+
+.full-width{
+  padding : 2 px;
+  height: 50px;
+  width: 95%;
+  margin-top: 2px;
+  font-size: 20px;
+  margin-bottom: 2px;
+  margin-left: 10px;
+}
+
+.buttons{
+  margin : 30px;
+}
+.rightcenter{
+  text-align : center;
+  margin : 5px;
+  padding : 5px;
+  min-width : 50vw;
+
+}
+
+.submit{
+  background-color: rgb(64, 61, 66);
+  font-size : 20px;
+  width : 120px;
+  color : white;
+  font-family : serif;
+  margin : auto;
+  margin-bottom : 5px;
+}
+
+.fform{
+  margin : auto;
+}
+
+.preview{
+  max-width : 250px;
+  height : auto;  
+}
+
+.selectedimg{
+  max-width : 250px;
+  height : auto;
+}

@@ -1,0 +1,40 @@
+.toolbar{
+    position: absolute;
+    min-width: 100vw;
+    height: 120px;
+    /* left: 0.33px; */
+    top: -4px;
+    background: rgb(64, 61, 66);;
+}
+
+.logo{
+    margin-top: 18px;
+    margin-left:20px;
+    float:left;
+    color: #f2f2f2;
+}
+
+.spacer{
+    flex :  1 1 auto;
+}
+
+.topnav  {
+    float: right ;
+    text-align: center;
+    padding: 14px 16px;
+    margin-top : 30px;
+}
+
+a{
+    color: #f2f2f2;
+    text-decoration-thickness: 5px;
+    font-size: 25px;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-right : 10px
+}
+
+a:hover {
+    text-decoration: none;
+    color: rgb(182, 161, 161);
+}
