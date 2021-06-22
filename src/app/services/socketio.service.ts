@@ -4,7 +4,6 @@ import { environment } from '../../environments/environment';
 import { Message } from '../models/message.model';
 import { User } from '../models/user.model';
 import { Room } from '../models/room.model';
-import { MESSAGES } from '../utils/messages';
 
 @Injectable({
   providedIn: 'root'
@@ -15,42 +14,41 @@ export class SocketioService {
 
   constructor() { }
   
-  setupSocketConnection() {
-    this.socket = io(environment.SOCKET_ENDPOINT);
-  }
+  // setupSocketConnection() {
+  //   this.socket = io(environment.SOCKET_ENDPOINT);
+  // }
 
-  joinRoom(user : User , room : Room){
-    this.socket.on("connect",()=>{
-      console.log(`${this.socket.id} connected!`);
-      this.socket.emit("join-room",{user,room});
-    });
-  }
+  // joinRoom(user : User , room : Room){
+  //   this.socket.on("connect",()=>{
+  //     console.log(`${this.socket.id} connected!`);
+  //     this.socket.emit("join-room",{user,room});
+  //   });
+  // }
 
-  sendMessage(data : Message){
-    console.log(data.text);
-    this.socket.emit("new-message", data);
-    // console.log("messsef");
+  // sendMessage(data : Message){
+  //   console.log(data.text);
+  //   this.socket.emit("new-message", data);
+  //   // console.log("messsef");
     
-    // data.room.messages.push(data);
-  }
+  //   // data.room.messages.push(data);
+  // }
     
-  getMessages(room : Room):Message[]{
-    this.socket.on("new-message",(data:Message)=>{
-      // console.log(data.text);
-      // room.messages.push(data);
-    });
-    return room.messages;
-  }
+  // getMessages(room : Room):Message[]{
+  //   this.socket.on("new-message",(data:Message)=>{
+  //     // console.log(data.text);
+  //     // room.messages.push(data);
+  //   });
+  //   return room.messages;
+  // }
 
-  getAllUsers(room :Room) : User[]{
-    return room.users;
-  }
+  // getAllUsers(room :Room) : User[]{
+  // }
     
-  getCurrentUsers(room : Room) : User[]{
-    this.socket.on("join-room",(data :any)=>{
+  // getCurrentUsers(room : Room) : User[]{
+  //   this.socket.on("join-room",(data :any)=>{
       
-    });
-    return room.currentUsers;
-  }
+  //   });
+
+  // }
 }
 

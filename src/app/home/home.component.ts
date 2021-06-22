@@ -15,7 +15,10 @@ export class HomeComponent implements OnInit {
   loginForm !: FormGroup;
   user !: User;     
 
-  constructor(private authService : AuthService , private userService : UserService , private fb:FormBuilder,private router: Router) { 
+  constructor(private authService : AuthService , 
+              private fb:FormBuilder,
+              private router: Router
+              ) { 
     this.createForm();
   }
 
@@ -32,6 +35,6 @@ export class HomeComponent implements OnInit {
     this.user= this.loginForm.value;
     console.log(this.user);
     this.authService.login({email : this.user.email , password : this.user.password});
-    this.router.navigate(['/rooms']);
+    this.router.navigate(['rooms']);
   } 
 }

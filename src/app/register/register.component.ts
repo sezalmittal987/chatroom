@@ -3,9 +3,9 @@ import { FormGroup, FormBuilder ,Validators} from '@angular/forms';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
 import { UserService  } from '../services/user.service';
-/********************* */
-import { RoomService} from '../services/room.service';
-/************* */
+import { ToastComponent } from '../toast/toast.component';
+import { ImageService } from '../services/image.service';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -18,7 +18,12 @@ export class RegisterComponent implements OnInit {
   img !: any;
   imgprev !: boolean;
 
-  constructor(private userService : UserService ,private fb:FormBuilder,private router: Router ,private roomService : RoomService) { 
+  constructor(private imageService : ImageService ,
+    private toast :ToastComponent ,
+    private userService : UserService ,
+    private fb:FormBuilder,
+    private router: Router ,
+    ) { 
     
   }
 
@@ -50,16 +55,23 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(){
     this.user = this.registerForm.value;
-    this.user.avatar = this.img;
     console.log(this.user);
-    this.userService.register(this.user).subscribe(
-        res => {
-          // this.toast.setMessage('you successfully registered!', 'success');
-          this.router.navigate(['/login']);
-        },
-        // error => this.toast.setMessage('email already exists', 'danger')
-      );
-    this.router.navigate(['/rooms']);
+    this.imageService.uploadImage(this.img).subscribe(
+      res=>{
+        this.user.avatar = res._id;
+        this.userService.register(this.user).subscribe(
+            res => {
+              this.toast.setMessage('you successfully registered!', 'success');
+              this.router.navigate(['home']);
+            },
+            error => this.toast.setMessage('email already exists', 'danger')
+          );
+      },
+      err=>{
+        this.toast.setMessage('email already exists', 'danger')
+      }
+    )
+    this.router.navigate(['rooms']);
   }
 
 

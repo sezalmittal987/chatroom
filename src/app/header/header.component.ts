@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,AfterViewChecked} from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user.model';
 
@@ -7,7 +7,7 @@ import { User } from '../models/user.model';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit , AfterViewChecked {
 
   loggedIn !: boolean ;
   currentUser !: User ;
@@ -18,5 +18,12 @@ export class HeaderComponent implements OnInit {
     this.loggedIn = this.authService.loggedIn;
     if(this.loggedIn) this.currentUser = this.authService.getUser();
   }
+  ngAfterViewChecked() {
+    this.loggedIn = this.authService.loggedIn;
+    if(this.loggedIn) this.currentUser = this.authService.getUser();
+}
 
+  logOut(){
+    this.authService.logout();
+  }
 }

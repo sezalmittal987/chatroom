@@ -26,7 +26,7 @@ import { RoomService } from './services/room.service';
 import { SocketioService } from './services/socketio.service';
 import { ImageService } from './services/image.service';
 import { ToastComponent } from './toast/toast.component';
-
+import { AccountService } from './services/account.service';
 
 @NgModule({
   declarations: [
@@ -64,6 +64,8 @@ import { ToastComponent } from './toast/toast.component';
     RoomService,
     SocketioService,
     ImageService,
+    ToastComponent,
+    AccountService,
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

@@ -12,7 +12,7 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(): boolean | UrlTree {
     if(this.auth.loggedIn) return true;
-    return this.router.createUrlTree(['/home']);
+    return this.router.createUrlTree(['home']);
   }
 
 }

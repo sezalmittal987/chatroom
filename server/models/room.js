@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 const roomSchema = new mongoose.Schema ({
-    icon : Buffer,
+    icon : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Image",
+    },
     roomname : String,
     tagline : String,
     description : String,

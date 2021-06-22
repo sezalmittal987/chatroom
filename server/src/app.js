@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const server = require('http').Server(app); 
-// const bodyParser = require('body-parser');
 const io = require('socket.io')(server);
 const path =require('path');
 const dotenv = require('dotenv');
@@ -9,17 +8,30 @@ const mongodb = require("mongodb");
 const mongoose = require("mongoose");
 const User = require('../models/user');
 const chatRouter = require('../routes/chat'); 
-// const userRouter = require('../routes/user');
 const userRouter= require('../controllers/userCtrl');
+const roomRouter = require('../controllers/roomCtrl');
 
 app.set( 'port',process.env.PORT||2000);
-dotenv.config();
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
+dotenv.config({path : '../../.env'});
+app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
+chatRouter(io);
+app.use('/api',userRouter);
+app.use('/api' ,roomRouter);
+// for accepting buffer request body
+app.use(function(req, res, next) {
+  req.rawBody = '';
+  req.setEncoding('utf8');
 
+  req.on('data', function(chunk) { 
+    req.rawBody += chunk;
+  });
+  req.on('end', function() {
+    next();
+  });
+});
 
-const uri = "mongodb+srv://Sezal:sezalmittal@cluster0.usfbe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = process.env.MONGO_URI;
 
 mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
@@ -34,13 +46,7 @@ db.once('open', function() {
   console.log('Database Connected!');
 });
 
-chatRouter(io);
-// userRouter();
-// const router = express.Router(); 
-app.use(userRouter);
-app.use('/api',userRouter);
-// router.route('/login').post(userCtrl.login);
-// router.route('/register').post(userCtrl.insert);
+
 
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));

@@ -1,1 +1,3 @@
-<p>toast works!</p>
+<div *ngIf="message.body" class="alert" [ngClass]="'alert-' + message.type" role="alert" fxLayoutAlign="center center">
+    <b>Message:</b> {{message.body}}
+</div>

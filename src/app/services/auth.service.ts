@@ -5,6 +5,8 @@ import { JwtHelperService } from '@auth0/angular-jwt' ;
 import { UserService } from './user.service';
 import { User }  from '../models/user.model';
 
+import { ToastComponent } from '../toast/toast.component';
+
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +21,7 @@ export class AuthService {
   constructor(private userService  : UserService,
               private router : Router,
               public jwtHelper : JwtHelperService,   
+              public toast : ToastComponent,
             ) {
     const token = localStorage.getItem('token');
     if (token) {
@@ -33,7 +36,6 @@ export class AuthService {
     this.currentUser.avatar = decodedUser.avatar;
     this.currentUser.username = decodedUser.username;
     this.currentUser.email = decodedUser.email ;
-    this.currentUser.rooms = decodedUser.rooms;
     this.currentUser.joinedRooms = decodedUser.joinedRooms;
     this.currentUser.myRooms = decodedUser.myRooms;
   }
@@ -49,9 +51,12 @@ export class AuthService {
         const decodedUser = this.decodeUserFromToken(res.token);
         this.setCurrentUser(decodedUser);
         this.loggedIn = true;
-        this.router.navigate(['/rooms']);
+        this.router.navigate(['rooms']);
       },
-      // error => this.toast.setMessage('invalid email or password!', 'danger')
+      error => {
+        console.log(error.message);
+        this.toast.setMessage('invalid email or password!', 'danger');
+      }
     );
   }
 
@@ -59,12 +64,15 @@ export class AuthService {
     localStorage.removeItem('token');
     this.loggedIn = false;
     this.currentUser = new User();
-    this.router.navigate(['/']);
+    this.router.navigate(['home']);
   }
 
   getUser() : any{
-    if(this.loggedIn) return this.currentUser;
-    // else this.toast.setMessage('User is not signed in !', 'danger')
+    if(this.loggedIn) {
+      this.currentUser;
+      return this.currentUser;
+    }
+    else this.toast.setMessage('User is not signed in !', 'danger')
   }
 
 }

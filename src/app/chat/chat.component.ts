@@ -4,8 +4,6 @@ import { Room } from '../models/room.model';
 import { Message } from '../models/message.model' ; 
 import { SocketioService}  from '../services/socketio.service';
 
-import { USERS } from '../utils/users';
-import { ROOMS} from '../utils/rooms';
 
 @Component({
   selector: 'app-chat',
@@ -28,21 +26,19 @@ export class ChatComponent implements OnInit{
   value !: string;
 
   ngOnInit(): void {
-    this.currentUser = USERS[0];
-    this.currentRoom = ROOMS[0];
-    this.socketService.setupSocketConnection();
-    this.socketService.joinRoom(this.currentUser,this.currentRoom);
-    this.messages = this.socketService.getMessages(this.currentRoom);
-    this.cusers=true;
-    this.currentUsers = this.socketService.getCurrentUsers(this.currentRoom);
-    this.allUsers =  this.socketService.getAllUsers(this.currentRoom);
-    this.value = "Type your message";
+    // this.socketService.setupSocketConnection();
+    // this.socketService.joinRoom(this.currentUser,this.currentRoom);
+    // this.messages = this.socketService.getMessages(this.currentRoom);
+    // this.cusers=true;
+    // this.currentUsers = this.socketService.getCurrentUsers(this.currentRoom);
+    // this.allUsers =  this.socketService.getAllUsers(this.currentRoom);
+    // this.value = "Type your message";
   }
 
   sendMessage(){
-    this.message = { user : this.currentUser , room : this.currentRoom ,timestamp : "01:03 AM" , text : this.newMessage }
-    this.socketService.sendMessage(this.message);
-    this.newMessage="";
+    // this.message = { user : this.currentUser , room : this.currentRoom ,timestamp : "01:03 AM" , text : this.newMessage }
+    // this.socketService.sendMessage(this.message);
+    // this.newMessage="";
   }
 
   toggleUsers(){

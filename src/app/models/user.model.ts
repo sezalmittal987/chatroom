@@ -1,12 +1,12 @@
 import { Room } from './room.model';
+import { ObjectId } from 'mongoose';
 
 export class User{
-    _id !: string;
-    avatar !: any ;
+    _id !: ObjectId;
+    avatar !: ObjectId;
     username !: string ;
     email !: string ;
     password !: string ;
-    rooms !:  Room[];
-    joinedRooms !: Room[];
-    myRooms !: Room[];
+    joinedRooms !: ObjectId[];
+    myRooms !: ObjectId[];
 }

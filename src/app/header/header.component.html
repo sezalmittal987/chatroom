@@ -8,8 +8,9 @@
                 <a routerLink="/rooms">Service </a>
                 <a routerLink="/">Contact Us </a>
             <a *ngIf="!loggedIn" routerLink="/">Login</a>
-            <a *ngIf="!loggedIn" routerLink="/">Signin</a>
+            <a *ngIf="!loggedIn" routerLink="/register">Signin</a>
             <a *ngIf="loggedIn">Hello {{currentUser.username}}</a>
+            <a *ngIf="loggedIn" (click) = "logOut()" >Log out <i class="fa fa-sign-out fa-x" aria-hidden="true"></i></a>
             </span>
         </div>
     <!-- </mat-toolbar> -->

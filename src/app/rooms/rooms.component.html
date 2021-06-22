@@ -43,7 +43,7 @@
     <h1 class="heading">Create a new room</h1>
     <div  fxLayoutAlign="center center">
       <div fxLayout="column" class="fform">
-        <form [formGroup]="createRoomForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="createRoomForm" enctype="multipart/form-data"   (ngSubmit)="onSubmit()">
           <div class="full-width">
               <label>Choose a room-name :<br></label>
               <input size="40" formControlName="roomname">
@@ -58,7 +58,7 @@
           </div>
           <div class="full-width">
               <label>Upload a profile picture:<br></label>
-              <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" formControlName="image">
+              <input type="file" accept="image/*" (change)="processFile($event)" formControlName="image">
           </div>
           <div fxLayout="column" class="center">
              <button type="submit" mat-raised-button class="submit">Sign-up</button>
@@ -76,17 +76,19 @@
   <div fxFlex ="50" *ngIf="!cform" class="leftcenter">
     <h1 class="heading">{{selectedRoom.roomname}}</h1>
     <mat-card class = "room-card mat-elevation-z8" >  
-      <div fxLayoutAlign= "center"><img class="selectedimg" src="{{selectedRoom.icon}}"></div>
+      <div fxLayoutAlign= "center"><img class="selectedimg" src="{{selectedImage}}"></div>
       <mat-card-header   fxLayoutAlign= "center" >
         <mat-card-title>{{selectedRoom.tagline}}</mat-card-title>
       </mat-card-header>
       <div>{{selectedRoom.description}}</div>
+      <div><b>{{adminname}}</b></div>
       <div>
-        <button style="margin : 10px;" mat-button (click)="showForm()">JOIN </button>
+        <button *ngIf="allrooms" style="margin : 10px;" mat-button (click)="joinRoom(selectedRoom)">JOIN </button>
+        <button *ngIf="!allrooms" style="margin : 10px;" mat-button (click) = "chat(selectedRoom)">CHAT</button>
       </div>
 
-      <mat-card-content fxLayoutAlign= "center" fxLayout="column"  >
-        <mat-card class = "room-card mat-elevation-z8" *ngFor="let user of selectedRoom.users">  
+      <mat-card-content fxLayoutAlign= "center" fxLayout="column" >
+        <mat-card class = "room-card mat-elevation-z8" *ngFor="let user of selectedUsers" >  
           <mat-card-header>
             <div mat-card-avatar  style="background-image: url({{user.avatar}});background-size: cover;"></div>
             <p>{{user.username}}</p>
