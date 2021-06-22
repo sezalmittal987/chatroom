@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 const mongodb = require("mongodb");
 const mongoose = require("mongoose");
 const User = require('../models/user');
-const chatRouter = require('../routes/chat'); 
+const chatRouter = require('../controllers/chatCtrl'); 
 const userRouter= require('../controllers/userCtrl');
 const roomRouter = require('../controllers/roomCtrl');
 
@@ -15,9 +15,12 @@ app.set( 'port',process.env.PORT||2000);
 dotenv.config({path : '../../.env'});
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
+
+//routes
 chatRouter(io);
 app.use('/api',userRouter);
 app.use('/api' ,roomRouter);
+
 // for accepting buffer request body
 app.use(function(req, res, next) {
   req.rawBody = '';

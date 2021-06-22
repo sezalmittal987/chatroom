@@ -81,7 +81,7 @@
         <mat-card-title>{{selectedRoom.tagline}}</mat-card-title>
       </mat-card-header>
       <div>{{selectedRoom.description}}</div>
-      <div><b>{{adminname}}</b></div>
+      <div>Admin - <b>{{adminname}}</b></div>
       <div>
         <button *ngIf="allrooms" style="margin : 10px;" mat-button (click)="joinRoom(selectedRoom)">JOIN </button>
         <button *ngIf="!allrooms" style="margin : 10px;" mat-button (click) = "chat(selectedRoom)">CHAT</button>
@@ -93,9 +93,9 @@
             <div mat-card-avatar  style="background-image: url({{user.avatar}});background-size: cover;"></div>
             <p>{{user.username}}</p>
           </mat-card-header>
-          <mat-card-actions >
+          <!-- <mat-card-actions >
             <button mat-button >Add Friend</button>
-          </mat-card-actions>
+          </mat-card-actions> -->
         </mat-card>
 
       </mat-card-content>

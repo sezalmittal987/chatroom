@@ -165,10 +165,10 @@ export class RoomsComponent implements OnInit {
         )},
       err=>{this.toast.setMessage('Server Error!', 'danger');}
     );
-   
+    this.showForm();
   }
   chat(input : Room){
-    this.router.navigate(['chats'], { queryParams: { room: this.selectedRoom._id, user: this.user._id } });
+    this.router.navigate(['chats'], { queryParams: { room: this.selectedRoom._id} });
   }
 
 }

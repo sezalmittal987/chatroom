@@ -22,20 +22,10 @@ const roomSchema = new mongoose.Schema ({
         },
     messages : [{
                 message:{
-                    user:{
-                        id: {
-                            type: mongoose.Schema.Types.ObjectId,
-                            ref: "User",
-                        }
-                    },
-                    room:{
-                        id: {
-                            type: mongoose.Schema.Types.ObjectId,
-                            ref: "Room",
-                        }
-                    } ,
-                    timestamp : String,
-                    text : String, 
+                    id: {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: "User",
+                    }
                 }
             }],
     currentUsers : [{

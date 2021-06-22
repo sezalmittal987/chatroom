@@ -1,5 +1,6 @@
 const Room =  require('../models/room');
 const User = require('../models/user');
+const Message = require('../models/message');
 const express = require("express") ;
 const mongoose = require('mongoose');
 const router = new express.Router();
@@ -44,9 +45,9 @@ router.get('/myrooms/:username', async(req,res)=>{
     }
 })
 
-router.get( '/room/get/:roomname' ,async(req,res)=>{
+router.get( '/room/get/:id' ,async(req,res)=>{
     try{
-        const obj = await Room.findOne({ roomname: req.params.roomname});
+        const obj = await Room.findOne({ _id: req.params.id});
         res.status(200).json(obj);
     } catch (err) {
         return res.status(500).json({ error: err.message });
@@ -95,14 +96,42 @@ router.get('/room/users/:id' ,async(req,res)=>{
     }
 })
 
+router.get('/room/current/:id' ,async(req,res)=>{
+    try{
+        const obj = await Room.findOne({_id : req.params.id} , 'currentUsers').populate('currentUsers').exec();
+        const arr = [];
+        for( let i = 0 ; i<obj.currentUsers.length ;i++ ){
+            const doc = await User.findOne({_id : obj.currentUsers[i]._id} , 'username'  );
+            arr.push(doc);
+        }
+        res.status(200).json(arr);
+    }catch(err) {
+        return res.status(400).json({ error: err.message });
+    }
+})
 
 router.get('/room/admin/:id' ,async(req,res)=>{
     try{
         const obj = await Room.findOne({_id : req.params.id} , 'admin').populate('admin').exec();
         const doc  = await User.findOne({_id : obj.admin._id});
+        res.status(200).json(doc);
+    }catch(err){
+        return res.status(400).json({ error: err.message });
+    }
+})
+
+router.get('/room/message/:id' , async(req,res)=>{
+    try{
+        const obj = await Room.findOne({_id : req.params.id} , 'messages').populate('messages').exec();
+        const arr = [];
+        for( let i = 0 ; i<obj.messages.length ;i++) {
+            const doc = await Message.findOne({_id : obj.messages[i]._id});
+            arr.push(doc);
+        }
         res.status(200).json(arr);
     }catch(err){
         return res.status(400).json({ error: err.message });
     }
 })
+
 module.exports = router;
