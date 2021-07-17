@@ -2,7 +2,7 @@
 
 
 notes
-/server/.env
+# /server/.env
 
 # compiled output
 /dist
