@@ -39,22 +39,23 @@ export class SocketioService implements OnInit{
 
   getMessages = new Observable<Message[]>((observer)=> {
     let messages !: Message[];
-    this.socket.on('new-message' , (roomid :ObjectId)=>{
-      console.log(roomid);
-      this.roomService.getMessages(roomid).subscribe( 
-        res=>{messages = res;observer.next(res);},
-        err=>{this.toast.setMessage('Couldn\'t load current users' , 'danger');}
-      )
+    this.socket.on('new-message', (data :Message[])=>{
+      observer.next(data);
+      // this.roomService.getMessages(roomid).subscribe( 
+      //   res=>{observer.next(res);},
+      //   err=>{this.toast.setMessage(err.message , 'danger');}                                                                                                                                                                                                                                                                                                                    
+      // )
     })
   }) 
 
   getCurrentUsers = new Observable<User[]>((observer)=> {
     let users !: User[];
-    this.socket.on('join-room' , (roomid :ObjectId)=>{
-      this.roomService.getCurrentUsers(roomid).subscribe(
-        res=>{users = res;observer.next(res);},
-        err=>{this.toast.setMessage('Couldn\'t load current users' , 'danger');}
-      )
+    this.socket.on('join-room' , (data :User[])=>{
+      observer.next(data);                                                                                                                                                                                                                                                                                                                    
+      // this.roomService.getCurrentUsers(roomid).subscribe(
+      //   res=>{users = res;observer.next(res);},
+      //   err=>{this.toast.setMessage(err.message , 'danger');}
+      // )
     })
   })
 }

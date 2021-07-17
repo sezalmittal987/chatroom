@@ -168,7 +168,7 @@ export class RoomsComponent implements OnInit {
     this.showForm();
   }
   chat(input : Room){
-    this.router.navigate(['chats'], { queryParams: { room: this.selectedRoom._id} });
+    this.router.navigate(['chats'], { queryParams: { room: this.selectedRoom._id , user : this.user._id} });
   }
 
 }

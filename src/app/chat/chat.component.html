@@ -13,7 +13,7 @@
         <section fxLayoutAlign="center center" style="font-size : 25px;"><b>{{currentRoom.roomname}}</b></section>
         <div class = "chat" style="overflow: scroll; height: 95%; bottom:0 ;margin-bottom:50px;"  #scrollMe [scrollTop]="scrollMe.scrollHeight" fxLayout="column">
             <div *ngFor = "let message of messages">
-                <div style="border-style: groove; margin : 2px" fxLayout="column">
+                <div style="border-style: groove; margin : 2px" fxLayout="column" style= "width :90%">
                     <div style="background-color : rgb(218, 203, 203);font-size : 9px;font-style: oblique;">{{message.timestamp}}</div>
                     <div>
                     {{message.text}}
@@ -22,7 +22,7 @@
         </div>
         <section class="text" fxFlex="90" fxLayout="row">
             <i class="far fa-keyboard fa-2x"></i>
-            <input  style="margin:5px" size = "{{(95/1000)*chatbox.offsetWidth}}" [(ngModel)] = "newMessage" (keyup)="$event.keyCode == 13 && sendMessage()"/><button (click)="sendMessage()">Send Message</button>
+            <input  style="margin:5px" size = "{{(90/1000)*chatbox.offsetWidth}}" [(ngModel)] = "newMessage" (keyup)="$event.keyCode == 13 && sendMessage()"/><button (click)="sendMessage()">Send Message</button>
         </section>
     </div>
 </div>

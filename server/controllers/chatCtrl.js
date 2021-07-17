@@ -15,8 +15,8 @@ module.exports = (io)=>{
             currentUser = await User.findOne({_id : data.user} ,'_id');
             const docs = await Room.findOneAndUpdate({_id : data.room} , {$push : {currentUsers : currentUser}}).populate('currentUsers').exec();
             // socket.broadcast.to(data.room).emit('message' , {...}); //broadcast message  
-            io.to(data.room).emit('join-room' , docs._id);
-            io.to(data.room).emit('new-message' , docs._id);
+            io.to(data.room).emit('join-room' , docs.currentUsers);
+            io.to(data.room).emit('new-message' , docs.messages);
         })
         
         socket.on("new-message", (data) => {

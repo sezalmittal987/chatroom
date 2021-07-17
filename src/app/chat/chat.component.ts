@@ -8,6 +8,8 @@ import { ObjectId } from 'mongoose';
 import { RoomService } from '../services/room.service';
 import { ToastComponent } from '../toast/toast.component';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-chat',
@@ -21,6 +23,7 @@ export class ChatComponent implements OnInit{
               private roomService : RoomService,
               private toast :ToastComponent,
               private authService : AuthService,
+              private router: Router,
               ) { }
 
   newMessage !: string;
@@ -36,9 +39,17 @@ export class ChatComponent implements OnInit{
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((res) => {
+      this.currentUser = this.authService.getUser();
       this.roomid = res.get('room');
+      const userid =this.currentUser._id.toString() ;
+      console.log(userid);
+      console.log(res.get('user'));
+      if( userid!== res.get('user') ) {
+        console.log('users are nt samee')
+        this.router.navigate(['room']);
+      }
     })
-    this.currentUser = this.authService.getUser();
+    
     this.roomService.getRoom(this.roomid).subscribe(
       res=>{
         this.currentRoom = res;
@@ -52,9 +63,10 @@ export class ChatComponent implements OnInit{
         this.socketService.getCurrentUsers.subscribe(
           res=>{this.currentUsers = res;},
           err=>{this.toast.setMessage("Couldn't load current users!" , 'danger');}
+
         );
         this.roomService.getSelectedUsers(this.currentRoom).subscribe(
-          res=>{this.allUsers = res;},
+          res=>{this.allUsers = res;console.log('fucntion called!');},
           err=>{this.toast.setMessage("Couldn't load users!" , 'danger');}
         );
         this.socketService.getMessages.subscribe(
@@ -67,7 +79,6 @@ export class ChatComponent implements OnInit{
       }
     );
     
-    
     this.value = "Type your message";
   }
 
@@ -79,6 +90,9 @@ export class ChatComponent implements OnInit{
 
   toggleUsers(){
     this.cusers = !(this.cusers);
+    if(this.cusers){
+
+    }
   }
 
 }
