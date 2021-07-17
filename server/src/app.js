@@ -34,8 +34,9 @@ app.use(function(req, res, next) {
   });
 });
 
-const uri = process.env.MONGO_URI;
+const uri = process.env.MONGO_URI || "mongodb+srv://Sezal:sezalmittal@cluster0.usfbe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
+console.log(uri);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
